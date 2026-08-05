@@ -48,3 +48,26 @@ Rastreio, rotas, tempo real
 
 Educação
 Plataformas, conteúdo, usuários
+#### O Ciclo de Vida da Requisição HTTP
+
+##### O que é HTTP?
+
+*HTTP*, Hypertext Transfer Protocol, é um protocolo de comunicação utilizado para transferência de informações na WWW (World wide Web) e em outros sistemas de redes.
+
+O HTTP é a base para que o cliente e um servidor web troquem informações. Ele permite a requisição e a resposta de recurso como, imagens, arquivos e textos.
+
+
+```mermaid
+
+graph TD
+    
+    A[Navegador]
+    B[HTTP]
+    C[Servidor]
+
+    A --> |request| B
+    B --> |request| C
+    C --> |response| B
+    B --> |response| A
+
+```
