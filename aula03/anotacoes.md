@@ -46,9 +46,9 @@ EX:
     const SITE = "www.googel.com.br"; //isso é um erro
 
 //exibir as constantes na tela
-echo "Valor de PI: PI <br>";
-echo "Nome da empresa: EMPRESA <br>";
-echo "Site: SITE <br>";
+echo "Valor de PI: " .PI. "<br>";
+echo "Nome da empresa: " .EMPRESA. "<br>";
+echo "Site: " .SITE. "<br>";
 
 ```
 
@@ -108,7 +108,7 @@ exibir com php é usando o print
     echo "Email: $email <br>";
 ```
 
-**Regra de ouro:** sempre coloque a instrução `declare(string_types=1):` na **primeira linha** do seu codigo PHP. isso blida o seu sistema contra mistura de acidentais de tipo.
+**Regra de ouro:** sempre coloque a instrução `declare(strict_types=1):` na **primeira linha** do seu codigo PHP. isso blida o seu sistema contra mistura de acidentais de tipo.
 por exemplo quando vai somar 2 + 2 e retorna 22.
 
 ### TEXTOS E COMPARAÇÕES AVANÇADAS
