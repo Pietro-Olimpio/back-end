@@ -168,6 +168,15 @@ echo "Ola, $nome ! Bem-vindo.";
 
 
 
-**Logicos**
+**Logicos**: Permite a Combinação entre sentenças.
+- Operador AND (E) => && : para o resultado ser verdadeiro todas as combinações precisam ser verdadeiras
+    - true && true => true
+    - true && false => false
+- Operador OR (OU) => || : para o resultado ser verdadeiro, Basta apenas uma condição ser verdadeira
+    - false || true => true
+    - false || false => false
+- Operador NOT (não) => ! : inverte a logica da operação
+    - !true => false
+    - !false => true
 
 
