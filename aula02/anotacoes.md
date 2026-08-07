@@ -5,6 +5,8 @@
 - **O Processamento Backend**: o codigo backend recebe o pedido, valida os dados e decide oque faze. EX: `consultar uma informação no BD(Base de dados).`
 - **Resposta**: O servidor devolve o resultado para a UI. Ex: `Um loguin Autorizado, Confirmaçãode uma compra...`
 
+---
+
 #### Tipos de requisições HTTP
 
 Os tipos de requisição HTTP indicao a ação que o usuario deseja executar no servidor. As principais ações são:
@@ -15,6 +17,7 @@ Os tipos de requisição HTTP indicao a ação que o usuario deseja executar no 
 - **PUT/PATCH**: Atualizações ou modificar um dado já existente.
 
 ---
+
 ### Iniciando o PHP
 
 **PHP** (HyperText PreProcessor) é uma linguagem de programação interpretada e open source, focada no desenvolvimento de sistemas para web, pode ser usada junto com HTML para criação de páginas web dinâmicas.
@@ -34,7 +37,14 @@ O PHP de fato é yma das linguagens de programação mais populares da atualidad
 ### Principais extenções pra PHP
 ![alt text](image.png)
 
-Desabilitar o php do vscode e habilitei o intelephence pesquisando nas extenções do vscode: `@builtin php language featres` 
+ - PHP Cs Fixer => Formatação de códigos(Identação)
+
+ - PHP Debug => ajuda a encontrar erros de código
+
+ - PHP Intelephense => permite a utilizaçã de Snippets(atalhos de Código)
+
+ - PHP Server => ajuda na criação de um servidor local para PHP
+- Desabilitar o php do vscode e habilitei o intelephence pesquisando nas extenções do vscode: `@builtin php language featres` 
 
 
 ---
@@ -49,5 +59,12 @@ Para criar uma aplicação em PHP vamos precisar usar a estrutura do html, pq qu
     echo "Hello, World!!!"
     ?> 
 //sera exibito um paragrafo com o texto acima
+```
+##### Como executar o codigo em PHP
+para executar o codigo em php primeiro precisamos saber que ele esta no html, com disse la em cima, o php funciona junto do html, seguinte isso utiliza-se o seguinte comando:
+
+```php
+php -S localhost:8080
+//sera aberto uma pagina web html na sua maquina com o ip 8080
 ```
 
