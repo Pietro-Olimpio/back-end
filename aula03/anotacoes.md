@@ -11,7 +11,7 @@ O formato de escrita em php é da seguinte maneira:
 ```
 Sempre fechar as linhas de comando PHP com ";" => para o PHP entender que o comando foi finalziado
 
-> Ou seja a principal formatação de escrita em php é a utilização de Tagm `<?php "aqui vai o codigo php" >`
+> Ou seja a principal formatação de escrita em php é a utilização de Tagm `<?php "aqui vai o codigo php" ?>`
 
 Para iprimir algo usa o `echo`
 
@@ -20,10 +20,14 @@ Um comentario em php é em tanto "//" ou "#". `comentarios são muito importante
 
 ---
 
-# Sintaxe de variaveis em PHP
-- **Variaveis:** O valor pode mudar durante a execução do script. em PHP **todas** as variaveis começão co o simbulo de dolar(`$`)
+# Estudo de Variaveis e constantes em PHP (sua sintaxe)
 
-EX:
+**Variaveis:** O valor pode mudar durante a execução do script. em PHP **todas** as variaveis começão co o simbulo de dolar(`$`)
+
+- são não tipadas ( não precisa declarar o tipo dela na criação) , 
+- podem ser String, Numericas ( interger e float), Booleanas  e Nulas. Não Permite declaração de Undefined
+
+EXEMPLOS:
 ```php
 //Variaveis (Usa o padrão camelCase para nomes)
 $nomeFuncionario = "Pietro Correa"; // uma variavel tipo string
@@ -33,7 +37,12 @@ $idade = 16; //variavel tipo number
 
 ---
 
-- **Constante** O valor **nunca** muda. Ideal para taxas de imposto. URL, etc. Uma outra forma de utilziar a const é com o define. **NÃO** se é possivel redeclarar uma constante
+**Constante** 
+- O valor **nunca** muda. 
+- Ideal para taxas de imposto. URL, etc. 
+- Uma outra forma de utilziar a "const" é com o "define". 
+- Não permite interpolação.
+- Sempre escrever em letras maiusculas.
 
 EX:
 ```php
@@ -125,3 +134,40 @@ echo 'Ola, ' . $nome . '! Bem-vindo.';
 //concatenação (Aspas Duplas) -mais limpo (clean code)
 echo "Ola, $nome ! Bem-vindo.";
 ```
+
+
+---
+
+## Estudos De Operadores
+
+**Aritméticos**: usados para realizar Calculos
+| Operador | Nome | Exemplo | Resultado |
+| - | - | - | - |
+| + | Adição | 10 + 5 | 15 |
+| - | Subtração | 10 - 5 | 5 |
+| * | Multiplicação | 10 * 5 | 50 |
+| / | Divisão | 10 / 5 | 2 |
+| % | Modulo(Resto) | 10 % 3 | 1 (10 div 3 da 3, sobra 1) |
+| ** | Expoente | 2 ** 3 | 8 (2 elevado a 3) |  
+
+>obs : O operador % é o melhor amigo de um programador, permite ordenar listas e organizar fila e pilhas
+
+**Relacionais**:  Permite o Relacionamento entre dois ou mais valores, o resultado de uma operação é sempre uma booleana (verdadeiro ou falso).
+
+| Operador | Significado | Exemplo | Resultado |
+| - |  - | - | - |
+| > | Maior que | 18 > 18 | false |
+| =>  | Maior ou igual a | 18 >= 18 | true |
+| < | Menor que | 10 < 20 | true |
+| <= | Menor ou igual a | 10 <= 5 | false
+| == | Comparaçã de valor | "10" == 10 | true |
+| === | Comparação estrita | "10" === 10 | false |
+| != | Diferente | "10" != 10 | false | 
+| !== | Estritamente diferente | "10" !== 10 | true | 
+
+
+
+
+**Logicos**
+
+
