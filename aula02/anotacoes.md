@@ -34,7 +34,7 @@ O PHP de fato é yma das linguagens de programação mais populares da atualidad
 ### Principais extenções pra PHP
 ![alt text](image.png)
 
-Desabilitar o php do vscode e habilitei o intelephence pesquisando nas extenções do vscode: `@builtin php`
+Desabilitar o php do vscode e habilitei o intelephence pesquisando nas extenções do vscode: `@builtin php language featres` 
 
 
 ---
