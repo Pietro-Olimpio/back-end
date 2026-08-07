@@ -42,3 +42,12 @@ Desabilitar o php do vscode e habilitei o intelephence pesquisando nas extençõ
 
 ##### Criando Minha Primeira Aplicação em PHP
 
+Para criar uma aplicação em PHP vamos precisar usar a estrutura do html, pq querendo ou não o php da vida ao html com o seguinte sintaxe:
+
+```php
+ <?php 
+    echo "Hello, World!!!"
+    ?> 
+//sera exibito um paragrafo com o texto acima
+```
+
