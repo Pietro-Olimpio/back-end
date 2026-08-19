@@ -20,7 +20,7 @@ for ($mes = 1; $mes <= 12; $mes++) {
     $jurosDoMes = $divida * $taxa;
     $divida = $divida + $jurosDoMes;
 
-    echo "\nMês $mes: Sua Divida de R$ " . number_format($divida, 2, ',', '.');
+    echo "\nNo mes $mes: teve uma divida de R$ " . number_format($divida, 2, ',', '.');
 }
 ?>
 
