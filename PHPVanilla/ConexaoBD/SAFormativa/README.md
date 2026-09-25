@@ -65,3 +65,10 @@ VALUES
 
 crie o arquivo. Ajuste as chaves de acesso ao banco de dados
 
+Colocar o arquivo de configuração dentro do `.gitignore`
+
+## Passo 5: Construindo A calsse singleton e conexão com o banco de dados (`src/conexaoBanco.php`)
+
+Criação de uma classe segura de conexão usando Singleton PDO e suas flags de seurança, e envelopamento (.ini) de Dados.
+
+## Passo 6. Construindo a interface de diagnostico do banco de dados (`index.php`)

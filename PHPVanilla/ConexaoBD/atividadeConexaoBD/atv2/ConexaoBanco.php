@@ -16,7 +16,7 @@ final class ConexaoBanco {
 
     //metodos de segurança anti clonagem e ati-serialização(desserialização)
     private function __clone(): void{}
-    private function __wakeup(): void{
+    public function __wakeup(): void{
         //estou criando uma execption (falhas/erros)
         throw new \Exception("Desserialização não permitida para Singleton");
     }
