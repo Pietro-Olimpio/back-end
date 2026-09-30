@@ -1,3 +1,5 @@
-# arquivos que n irão para o versionamento
+# arquivos que não irão para o Versionamento
 
 config/database.ini
+
+logs/
