@@ -2,7 +2,7 @@
 
 <?php
 
-$siglaEstado = "PL";
+$siglaEstado = "SP";
 
 $valorFrete = match ($siglaEstado) {
     "SP", "RJ", "MG", "ES" => 35.00,
