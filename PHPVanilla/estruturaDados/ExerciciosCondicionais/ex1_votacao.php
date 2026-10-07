@@ -11,7 +11,7 @@ if ($idade < 16) {
 //se a iade for entre 16 e 17 ou maior/igual a 70
 } elseif (($idade >= 16 && $idade <= 17) || $idade >= 70) {
 
-    echo "Voto Obrigatório";
+    echo "Voto Facultativo";
 
 // se a idade for entre 18 e 69
 } else{

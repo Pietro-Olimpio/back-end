@@ -22,6 +22,6 @@ if($isEstudante === true) {
 
 $valorFinal = $descontoDia;
 
-echo "O valor final do ingresso ficou em R$ ". number_format($valorFinal,2,".");
+echo "O valor final do ingresso ficou em R$ ". number_format($valorFinal, 2, ",", ".");
 
-?>
+?>cd

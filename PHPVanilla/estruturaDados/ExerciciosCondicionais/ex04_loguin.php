@@ -13,6 +13,6 @@ $senhaSistema = "SenhaSegura123";
 if (($senhaDigitada === $senhaSistema && $cargoUsuario === "Diretor" || "Gerente")){
     echo "Acesso Liberado";
 } else {
-
+    echo "Erro a senha ai?";
 }
 ?>

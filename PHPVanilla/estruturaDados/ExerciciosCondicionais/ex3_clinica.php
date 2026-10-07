@@ -18,15 +18,15 @@ if ($peso < 18.5){
     echo "Abaixo do peso";
 
     //peso normal
-} elseif (($peso >= 18.5 && $peso <= 24.9 )){
+} elseif (($IMC >= 18.5 && $IMC <= 24.9 )){
     echo "Peso normal";
 
     //sobrepeso
-}elseif (($peso >= 25.0 && $peso <= 29.9)){
+}elseif (($IMC >= 25.0 && $IMC <= 29.9)){
     echo "Sobrepeso";
 
     //obesidade Grau 1"
-} elseif (($peso >= 30.0 && $peso <= 34.9)){
+} elseif (($IMC >= 30.0 && $IMC <= 34.9)){
     echo "Obesidade grau 1";
 
     //obesidade grau 2 ou 3
