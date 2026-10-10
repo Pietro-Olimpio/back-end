@@ -2,12 +2,21 @@
 
 declare(strict_types=1);
 
-// Busca vulnerável
-function buscarVulneravel(PDO $pdo, string $termo): void {
+// Cria a conexão com o banco
+function conectar(): PDO {
+    return new PDO(
+        "pgsql:host=localhost;dbname=seu_banco",
+        "seu_usuario",
+        "sua_senha"
+    );
+}
+
+// Busca vulnerável: concatenação intencional para o teste
+function buscarVulneravel(string $termo): void {
+    $pdo = conectar();
     $sql = "SELECT * FROM usuarios WHERE nome = '$termo'";
 
     echo "\nBusca vulnerável:\n";
-
     $stmt = $pdo->query($sql);
 
     while ($resultado = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -16,34 +25,25 @@ function buscarVulneravel(PDO $pdo, string $termo): void {
 }
 
 // Busca protegida
-function buscarProtegido(PDO $pdo, string $termo): void {
+function buscarProtegido(string $termo): void {
+    $pdo = conectar();
     $sql = "SELECT * FROM usuarios WHERE nome = :nome";
 
     echo "\nBusca protegida:\n";
-
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['nome' => $termo]);
 
-    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($resultado) {
-        echo "Registro encontrado: " . $resultado['nome'] . "\n";
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "Registro encontrado.\n";
     } else {
         echo "Nenhum registro encontrado.\n";
     }
 }
 
-// Conexão com o banco
-$pdo = new PDO(
-    "pgsql:host=localhost;dbname=seu_banco",
-    "seu_usuario",
-    "sua_senha"
-);
-
-// Teste das duas consultas
+// Executa o teste
 $termo = "' OR '1'='1";
 
-buscarVulneravel($pdo, $termo);
-buscarProtegido($pdo, $termo);
+buscarVulneravel($termo);
+buscarProtegido($termo);
 
 ?>

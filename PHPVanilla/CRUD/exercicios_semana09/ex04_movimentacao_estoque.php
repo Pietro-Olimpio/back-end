@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-// DAO para movimentação do estoque
+// DAO para movimentação de peças
 final class ex04_movimentacao_estoque {
 
     private PDO $pdo;
@@ -10,64 +11,62 @@ final class ex04_movimentacao_estoque {
         $this->pdo = $pdo;
     }
 
-    // Registra uma movimentação no estoque
+    // Busca o saldo atual da peça
+    private function buscarSaldo(int $pecaId): ?int {
+        $sql = "SELECT quantidade FROM pecas_industriais
+                WHERE id = :id FOR UPDATE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $pecaId]);
+        $peca = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $peca ? (int) $peca['quantidade'] : null;
+    }
+
+    // Atualiza o saldo da peça
+    private function atualizarSaldo(int $pecaId, int $saldo): void {
+        $sql = "UPDATE pecas_industriais
+                SET quantidade = :quantidade WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'quantidade' => $saldo,
+            'id' => $pecaId
+        ]);
+    }
+
+    // Registra uma entrada ou saída
     public function registrarMovimentacao(
         int $pecaId,
         int $quantidade,
         string $tipo
     ): bool {
+        if ($quantidade <= 0 ||
+            ($tipo !== 'entrada' && $tipo !== 'saida')) {
+            return false;
+        }
+
         $this->pdo->beginTransaction();
 
         try {
-            // Busca a quantidade atual
-            $sql = "SELECT quantidade FROM pecas_industriais
-                    WHERE id = :id FOR UPDATE";
+            $saldo = $this->buscarSaldo($pecaId);
 
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(['id' => $pecaId]);
-
-            $peca = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (!$peca || $quantidade <= 0) {
+            if ($saldo === null ||
+                ($tipo === 'saida' && $saldo < $quantidade)) {
                 $this->pdo->rollBack();
                 return false;
             }
 
-            $saldo = (int) $peca['quantidade'];
+            $novoSaldo = $tipo === 'entrada'
+                ? $saldo + $quantidade
+                : $saldo - $quantidade;
 
-            // Verifica a saída do estoque
-            if ($tipo === 'saida' && $saldo < $quantidade) {
-                $this->pdo->rollBack();
-                return false;
-            }
-
-            // Calcula o novo saldo
-            if ($tipo === 'entrada') {
-                $saldo = $saldo + $quantidade;
-            } elseif ($tipo === 'saida') {
-                $saldo = $saldo - $quantidade;
-            } else {
-                $this->pdo->rollBack();
-                return false;
-            }
-
-            // Atualiza a quantidade
-            $sql = "UPDATE pecas_industriais
-                    SET quantidade = :quantidade
-                    WHERE id = :id";
-
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
-                'quantidade' => $saldo,
-                'id' => $pecaId
-            ]);
-
+            $this->atualizarSaldo($pecaId, $novoSaldo);
             $this->pdo->commit();
 
             return true;
-
         } catch (PDOException $e) {
-            $this->pdo->rollBack();
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
             return false;
         }
     }
