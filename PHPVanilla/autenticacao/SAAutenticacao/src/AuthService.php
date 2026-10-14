@@ -16,7 +16,7 @@ final class AuthService {
             session_set_cookie_params([
                 "lifetime"  =>0,
                 "path"      =>"/",
-                "httoinly"  =>true,
+                "httponly"  =>true,
                 "samesite"  =>"Lax",
             ]);
             //inicia a session
@@ -38,13 +38,39 @@ final class AuthService {
         $_SESSION["ultimo_acesso"]      = time();
     }
 
-    //verifica  tempo de inicatividade
-    public static function verificarEcpiracao(): bool {
+    // verificação de tempo de inicatividade
+    public static function verificarExpiracao(): bool {
         self::iniciarSessaoSegura();
+        //se não tiver sessão, então inicia uma (direciona para login)
         if(!isset($_SESSION["ultimo_acesso"])){
             return true;
+        }
+        //se já exisitir uma sessão iniciada, epassou do tempo de inatividade
+        if((time() - $_SESSION["ultimo_acesso"]) > self::TEMPO_INATIVIDADE_SEG){
+            self::destruirSessao(); //deslogar o usuário
+            return true; //retornar para tela de login
+        }
+        $_SESSION["ultimo_acesso"] = time();
+        return false; // continua logado
     }
-    if((time() - $_SESSION["ultimo"]))
 
+    //destruir a session => função que permite deslogar o usuário e limpar os dados da sessão
+    public static function destruirSessao(): void {
+        self::iniciarSessaoSegura();
+        $_SESSION=[];
 
+        //Limpando os dados do cookies da sessao
+        if(ini_get("session.use_coockies")){
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),"",time()-42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+        //executa a função nativa de logout de sessão
+        session_destroy();
+    }
 }
+
+

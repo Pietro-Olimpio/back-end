@@ -95,14 +95,59 @@ final class ConexaoBanco {
     }
 }
 ```
+## Fazer o Serviço de Autenticação (`src/AuthService.php`)
 
-## Camada de Acesso a Dados (`src/UsuarioDAO.php`)
+classe que ira criar o ciclo de vida da sessão do usuário: cookies(navegador) e as sessão(servidor)
 
-isolar as operações de busca e cadastro de usuarios, aplicando o hashing de senha com `password_hash()`
+> obs: classe tipo static (não existe instnaciamento de objetos)
 
-criar os emtodos:
-- Cadastrar (Create)
-- Buscar por email (Read)
-- Verificar se email já existe (Read)
+AuthService.php
+- iniciarSessaoSegura() => passa as informações para cookies
+- autenticar() -> passa as informações para a superglobal
+- sessaoExpirada() => verifica o tempo de inatividade
+- sessionDestroy() => finaliza a sessão e limpas os cookies do navegador
 
-## Fazer o Serviço de Autenticacao (`src/AuthService.php`)
+## Middleware Interceptador (`src/guard.php`)
+
+bloqueia visitantes não autenticados ou sessões expiradas em páginas internas
+
+- verifica os estado da sessão
+- verifica se a sessão não expirou
+
+## Criar as Telas
+
+### Tela de cadastro (`cadastro.php`)
+
+### Tela de login (`Login.php`)
+
+### Tela de DashBoard (`dashboard.php`)
+
+### Campo de Logout (`logout.php`)
+
+
+## Teste
+
+1. Inicie o servidor embutido do PHP:
+   ```bash
+   php -S localhost:8000
+   ```
+2. **Teste 1 — Cadastro de Novo Usuário:**
+   Acesse `http://localhost:8000/cadastro.php`, cadastre um novo colaborador (ex.: `maria@senai.br`) com senha de no mínimo 8 caracteres.  
+   *Resultado Esperado:* O usuário é registrado no PostgreSQL com hash Argon2id e redirecionado para `login.php?sucesso=cadastrado` com feedback visual em verde.
+3. **Teste 2 — Autenticação do Usuário Recém-Cadastrado:**
+   Faça login utilizando as novas credenciais criadas.  
+   *Resultado Esperado:* Acesso concedido com sucesso ao painel `dashboard.php`, exibindo o nome e o perfil `OPERADOR`.
+4. **Teste 3 — Acesso Direto não Autenticado:**
+   Abra uma aba anônima e tente digitar diretamente: `http://localhost:8000/dashboard.php`.  
+   *Resultado Esperado:* O `guard.php` intercepta a requisição e o expulsa para `login.php?erro=restrito`.
+5. **Teste 4 — Inspeção de Flags no DevTools:**
+   No painel autenticado, abra o DevTools (**F12**) ➔ Aba **Application (ou Armazenamento)** ➔ **Cookies** ➔ `http://localhost:8000`.  
+   *Resultado Esperado:* O cookie `PHPSESSID` exibirá a coluna **HttpOnly** marcada com `✔` e **SameSite** configurado como `Lax`.
+6. **Teste 5 — Proteção contra Roubo via Console JavaScript:**
+   No console do DevTools (**F12 ➔ Console**), digite: `console.log(document.cookie)`.  
+   *Resultado Esperado:* Uma string vazia `""`! A flag `HttpOnly` impediu com sucesso que o JavaScript lesse o token de sessão!
+7. **Teste 6 — Encerramento Seguro:**
+   Clique no botão **Sair do Sistema**.  
+   *Resultado Esperado:* O array `$_SESSION` é limpo no servidor, o cookie é destruído com timestamp expirado e a página redireciona para a tela de login.
+
+
