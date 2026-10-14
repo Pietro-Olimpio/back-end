@@ -10,6 +10,7 @@ $produtos = [
 $pedido = [];
 $opcao = 0;
 
+//do pras opções
 do {
 
     echo "\n==============================\n";
@@ -227,18 +228,12 @@ do {
         }
 
         //desconto
-        if ($pagamento == 1) {
-
-            $desconto = $total * 0.05;
-
-        } elseif ($pagamento == 2) {
-
-            $desconto = 0;
-
-        } else {
-
-            $desconto = $total * 0.03;
-        }
+        $desconto = match ($pagamento) {
+    1 => $total * 0.05,
+    2 => 0,
+    3 => $total * 0.03,
+    default => 0
+    };
 
         $totalFinal = $total - $desconto;
 
