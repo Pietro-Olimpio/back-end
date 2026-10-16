@@ -1,6 +1,13 @@
 <?php
 declare(strict_types=1);
 
+
+//required_once => importar as classes de conexão e DAO
+require_once __DIR__ . "/src/ConexaoBanco.php";
+require_once __DIR__ . "/src/AlmoxarifadoDAO.php";
+
+//constante das configurações
+const CONFIG_PATH = __DIR__ . "/config/database.ini";
 // Camada de acesso a dados (DAO) para o almoxarifado
 // Essa classe realiza operações no banco de dados
 
@@ -43,14 +50,6 @@ final class ex01_cli_ferramentas
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
-// Carrega as configurações da conexão com o banco
-// Ajuste os dados conforme a configuração do seu PostgreSQL
-$pdo = new PDO(
-    "pgsql:host=localhost;port=5432;dbname=almoxarifado",
-    "postgres",
-    "sua_senha"
-);
 
 // Cria o objeto DAO com a conexão
 $ferramentas = new ex01_cli_ferramentas($pdo);

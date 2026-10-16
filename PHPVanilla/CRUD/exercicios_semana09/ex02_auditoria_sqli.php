@@ -5,9 +5,9 @@ declare(strict_types=1);
 // Cria a conexão com o banco
 function conectar(): PDO {
     return new PDO(
-        "pgsql:host=localhost;dbname=seu_banco",
-        "seu_usuario",
-        "sua_senha"
+    "pgsql:host=localhost;dbname=almoxarifado_senai",
+    "postgres",
+    "postgres"
     );
 }
 
