@@ -44,7 +44,9 @@ echo "<h1>Catálogo de peças industriais</h1>";
 // Exibe as peças encontradas
 while ($peca = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "ID: " . e((string) $peca['id']) . "<br>";
-    echo "Nome: " . e((string) $peca['nome']) . "<br>";
+    echo "Código SKU: " . e((string) $peca['codigo_sku']) . "<br>";
+    echo "Descrição: " . e((string) $peca['descricao']) . "<br>";
+    echo "Categoria: " . e((string) $peca['categoria']) . "<br>";
     echo "<hr>";
 }
 
