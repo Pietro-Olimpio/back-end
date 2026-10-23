@@ -1,6 +1,6 @@
 # Situação de Aprendizagem - Programação Orientada a Objetos(POO) - SENAI Bank
 
-## Estrutura de diretorios do projeto
+## Estrutura de Diretórios do Projeto
 
 Crie a árvores de arquivos e diretórios da seguinte forma:
 
@@ -20,6 +20,13 @@ SAPOO/
 └── README.md                               <- Documentação e testes
 ```
 
-## Criação das Exceptions de Dominio
 
-### Conta Exceptions (`src/Exceptions/ContaExceptions.php`)
+## Criação da Exception de Dominio
+
+### Conta Exception (`src/Exceptions/ContaException.php`)
+
+## Entidade de Titularidade (`src/Dominio/Titular.php`)
+
+## SuperClasse Chamada ContaBancaria -> Abstrata
+
+
