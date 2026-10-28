@@ -1,0 +1,9 @@
+# ocultar configuraçõed oo sistema
+config/
+
+# pasta de bibliotecas e dependências
+vendor/
+
+#pasta de logs do sistema
+logs/
+
